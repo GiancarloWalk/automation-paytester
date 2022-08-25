@@ -91,18 +91,3 @@ resource "ibm_pi_instance" "instance" {
     network_id = data.ibm_pi_network.power_networks.0.id 
   }
 }
-
-
-resource "azurerm_route_table" "test-routetable" {
-  name                = "testroutes"
-  location            = var.location
-  resource_group_name = var.resourcegroupname
-  disable_bgp_route_propagation = false
-
-  route {
-    name                    = "clientsubnet_to_nva"
-    address_prefix          = var.networkipaddress["clientsubnet"] # This is a map variable
-    next_hop_type           = "VirtualAppliance"
-    next_hop_in_ip_address  = local.nva-ge3_ip # a local that populates the ip of my network virtual appliance
-  }
-}
