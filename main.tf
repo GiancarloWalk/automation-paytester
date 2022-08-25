@@ -49,13 +49,6 @@ resource "ibm_pi_network" "pub_network" {
   pi_dns               = ["9.9.9.9"]
 }
 
-data "ibm_pi_network" "pub_network" {
-  depends_on           = [ibm_pi_network.pub_network]
-  pi_cloud_instance_id = local.cloud_instance_id
-  pi_network_name      = "pub-network-${local.timestamp}"
-}  
-
-
 resource "ibm_pi_network" "priv_network" {
   count                = 1
   pi_network_name      = "priv-network-${local.timestamp}"  
@@ -70,7 +63,13 @@ resource "ibm_pi_network" "priv_network" {
   }
 }
 
-data "ibm_pi_network" "priv-network" {
+data "ibm_pi_network" "pub_network" {
+  depends_on           = [ibm_pi_network.pub_network]
+  pi_cloud_instance_id = local.cloud_instance_id
+  pi_network_name      = "pub-network-${local.timestamp}"
+}  
+
+data "ibm_pi_network" "priv_network" {
   depends_on           = [ibm_pi_network.priv_network]
   pi_cloud_instance_id = local.cloud_instance_id
   pi_network_name      = "priv-network-${local.timestamp}"
@@ -87,6 +86,9 @@ resource "ibm_pi_instance" "instance" {
   pi_sys_type          = var.sys_type
   pi_storage_type      = var.storage_type
   pi_network {
-    network_id = data.ibm_pi_network.pub-network.id  
+    network_id = data.ibm_pi_network.pub_network.id  
+  }
+  pi_network {
+    network_id = data.ibm_pi_network.priv_network.id  
   }
 }

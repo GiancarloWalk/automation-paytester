@@ -18,31 +18,31 @@ variable "ssh_key_value" {
 
 variable "memory" {
   type        = number
-  default     = 5
   description = "The amount of memory that you want to assign to your instance in gigabytes"
+  default     = 5
 }
 variable "processors" {
   type        = number
-  default     = 0.25
   description = "The number of vCPUs to assign to the VM as visible within the guest Operating System"
+  default     = 0.25
 }
 variable "instance_name" {
   type        = string
-  default     = "paytesteruser"
   description = "The name to assign to the instance"
+  default     = "paytesteruser"
 }
 variable "processor_type" {
   type        = string
-  default     = "shared"
   description = "The type of processor mode in which the VM will run with 'shared', 'capped' or 'dedicated'"
+  default     = "shared"
 }
 variable "sys_type" {
   type        = string
-  default     = "s922"
   description = "The type of system on which to create the VM: 's922', 'e880', 'e980', 'e1080', or 's1022'"
+  default     = "s922"
 }
 variable "storage_type" {
   type        = string
-  default     = "tier3"
   description = "The type of storage tier to assign for storage volume performance: 'tier1' or 'tier3'"
+  default     = "tier3"
 }
