@@ -1,3 +1,7 @@
+local {
+    timestamp = formatdate("YYYYMMDDhhmmss", timestamp())
+}
+
 #resource "ibm_pi_image" "custom-image" {
 #  pi_cloud_instance_id      = local.cloud_instance_id
 #  pi_image_name             = "custom-image-${local.timestamp}"
