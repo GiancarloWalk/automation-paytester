@@ -47,7 +47,7 @@ variable "storage_type" {
   default     = "tier3"
 }
 
-variable "networks" {
-    description = "List of networks that should be attached to the VM"
-    default     = ["YOUR_NETWORK_NAME"]
-}
+#variable "networks" {
+#    description = "List of networks that should be attached to the VM"
+#    default     = ["YOUR_NETWORK_NAME"]
+#}

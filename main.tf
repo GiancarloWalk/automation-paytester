@@ -59,22 +59,22 @@ resource "ibm_pi_network" "priv_network" {
   }
 }
 
-data "ibm_pi_network" "pub_network" {
-  depends_on           = [ibm_pi_network.pub_network]
-  pi_cloud_instance_id = local.cloud_instance_id
-  pi_network_name      = "pub-network-${local.timestamp}"
-}  
+#data "ibm_pi_network" "pub_network" {
+#  depends_on           = [ibm_pi_network.pub_network]
+#  pi_cloud_instance_id = local.cloud_instance_id
+#  pi_network_name      = "pub-network-${local.timestamp}"
+#}  
 
-data "ibm_pi_network" "priv_network" {
-  depends_on           = [ibm_pi_network.priv_network]
-  pi_cloud_instance_id = local.cloud_instance_id
-  pi_network_name      = "priv-network-${local.timestamp}"
-}
+#data "ibm_pi_network" "priv_network" {
+#  depends_on           = [ibm_pi_network.priv_network]
+#  pi_cloud_instance_id = local.cloud_instance_id
+#  pi_network_name      = "priv-network-${local.timestamp}"
+#}
 
 data "ibm_pi_network" "power_networks" {
-    count                = length(var.networks)
-    pi_network_name      = var.networks[count.index]
-    pi_cloud_instance_id = var.cloud_instance_id
+    count                = 2
+    pi_network_name      = ["pub-network-${local.timestamp}","priv-network-${local.timestamp}"]
+    pi_cloud_instance_id = local.cloud_instance_id
 }
 
 resource "ibm_pi_instance" "instance" {
