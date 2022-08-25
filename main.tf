@@ -1,4 +1,4 @@
-resource "ibm_pi_image" "testacc_image  "{
+resource "ibm_pi_image" "testacc_image" {
   pi_image_name             = "custom-image-imported"
   pi_cloud_instance_id      = "d79a6170-22cc-47a0-bede-5f141d44f6c0"
   pi_image_bucket_name      = "pt-bucket"
