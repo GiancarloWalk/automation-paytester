@@ -87,6 +87,6 @@ resource "ibm_pi_instance" "instance" {
   pi_sys_type          = var.sys_type
   pi_storage_type      = var.storage_type
   pi_network {
-    network_id = data.ibm_pi_network.priv-network.id  
+    network_id = data.ibm_pi_network.pub-network.id  
   }
 }
