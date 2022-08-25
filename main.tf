@@ -1,7 +1,3 @@
-locals {
-timestamp = formatdate("YYYYMMDDhhmmss", timestamp())
-}
-
 #resource "ibm_pi_image" "custom-image" {
 #  pi_cloud_instance_id      = local.cloud_instance_id
 #  pi_image_name             = "custom-image-${local.timestamp}"
@@ -75,20 +71,38 @@ data "ibm_pi_network" "priv_network" {
   pi_network_name      = "priv-network-${local.timestamp}"
 }
 
+data "ibm_pi_network" "power_networks" {
+    count                = length(var.networks)
+    pi_network_name      = var.networks[count.index]
+    pi_cloud_instance_id = var.cloud_instance_id
+}
+
 resource "ibm_pi_instance" "instance" {
   pi_cloud_instance_id = local.cloud_instance_id
   pi_memory            = var.memory
   pi_processors        = var.processors
-  pi_instance_name     = "lpar-${local.timestamp}"
+  pi_instance_name     = "paytester-${local.timestamp}"
   pi_proc_type         = var.processor_type
   pi_image_id          = data.ibm_pi_image.custom_image.id
   pi_key_pair_name     = data.ibm_pi_key.ssh_key.id
   pi_sys_type          = var.sys_type
   pi_storage_type      = var.storage_type
-  pi_network {
-    network_id = data.ibm_pi_network.pub_network.id  
+  pi_network { 
+    network_id = data.ibm_pi_network.power_networks.0.id 
   }
-  pi_network {
-    network_id = data.ibm_pi_network.priv_network.id  
+}
+
+
+resource "azurerm_route_table" "test-routetable" {
+  name                = "testroutes"
+  location            = var.location
+  resource_group_name = var.resourcegroupname
+  disable_bgp_route_propagation = false
+
+  route {
+    name                    = "clientsubnet_to_nva"
+    address_prefix          = var.networkipaddress["clientsubnet"] # This is a map variable
+    next_hop_type           = "VirtualAppliance"
+    next_hop_in_ip_address  = local.nva-ge3_ip # a local that populates the ip of my network virtual appliance
   }
 }

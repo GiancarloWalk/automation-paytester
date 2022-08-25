@@ -46,3 +46,8 @@ variable "storage_type" {
   description = "The type of storage tier to assign for storage volume performance: 'tier1' or 'tier3'"
   default     = "tier3"
 }
+
+variable "networks" {
+    description = "List of networks that should be attached to the VM"
+    default     = ["YOUR_NETWORK_NAME"]
+}
