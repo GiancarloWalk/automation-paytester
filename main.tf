@@ -27,7 +27,7 @@ resource "ibm_pi_key" "ssh_key" {
 }
 
 data "ibm_pi_key" "ssh_key" {
-  depends_on           = [ibm_pi_key.power_sshkey]
+  depends_on           = [ibm_pi_key.ssh_key]
   pi_cloud_instance_id = local.cloud_instance_id
   pi_key_name          = "ssh-key-${local.timestamp}"
 }
