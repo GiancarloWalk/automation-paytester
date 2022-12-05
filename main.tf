@@ -1,25 +1,3 @@
-#resource "ibm_pi_image" "custom-image" {
-#  pi_cloud_instance_id      = local.cloud_instance_id
-#  pi_image_name             = "custom-image-${local.timestamp}"
-#  pi_image_bucket_name      = "pt-bucket"
-#  pi_image_bucket_access    = "private"
-#  pi_image_access_key       = "a7740bb9922f4030a4e00fecca769d20"
-#  pi_image_secret_key       = "0b23eac638f040ce3c3c65fea133d7ffd0ddaeeca30b0adf"
-#  pi_image_bucket_region    = "us-south"
-#  pi_image_bucket_file_name = "paytesterv1.ova.gz"
-#  pi_image_storage_type     = "tier1"
-#  timeouts {
-#   create = "2h"
-#   delete = "2h"
-#  }
-#}
-
-#data "ibm_pi_image" "custom_image" {
-#  depends_on           = [ibm_pi_image.custom-image]
-#  pi_cloud_instance_id = local.cloud_instance_id
-#  pi_image_name        = "custom-image-${local.timestamp}"
-#}
-
 resource "ibm_pi_ike_policy" "rs-ike-policy" {
         pi_cloud_instance_id    = local.cloud_instance_id
         pi_policy_name          = "ike-policy"
