@@ -1,7 +1,6 @@
 variable "api_key" {
   type        = string
   description = "API Key to use"
-  default     = "ppwmHCi_1-F6f9NoiPAf8g2IJ6gnoE3DtDm0Md-OUoj6"
 }
 
 variable "crn" {
