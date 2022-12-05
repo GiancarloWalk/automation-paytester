@@ -1,6 +1,6 @@
-resource "ibm_pi_ike_policy" "rs-ike-policy" {
+resource "ibm_pi_ike_policy" "rs_ike_policy" {
         pi_cloud_instance_id    = local.cloud_instance_id
-        pi_policy_name          = "ike-policy"
+        pi_policy_name          = "ike_policy"
         pi_policy_dh_group = 20
         pi_policy_encryption = "aes-256-cbc"
         pi_policy_key_lifetime = 28800
@@ -9,9 +9,9 @@ resource "ibm_pi_ike_policy" "rs-ike-policy" {
         pi_policy_authentication = "sha-256"
     }
 
-resource "ibm_pi_ipsec_policy" "rs-ipsec-policy" {
+resource "ibm_pi_ipsec_policy" "rs_ipsec_policy" {
         pi_cloud_instance_id    = local.cloud_instance_id
-        pi_policy_name          = "ipsec-policy"
+        pi_policy_name          = "ipsec_policy"
         pi_policy_dh_group = 20
         pi_policy_encryption = "aes-256-cbc"
         pi_policy_key_lifetime = 3600
@@ -19,18 +19,18 @@ resource "ibm_pi_ipsec_policy" "rs-ipsec-policy" {
         pi_policy_authentication = "hmac-sha-256-128"
     }
 
-data "ibm_pi_network" "ds-network" {
+data "ibm_pi_network" "ds_network" {
   pi_network_name = "vpn-subnet"
   pi_cloud_instance_id = local.cloud_instance_id
 }
 
-resource "ibm_pi_vpn_connection" "rs-vpn-connection" {
+resource "ibm_pi_vpn_connection" "rs_vpn_connection" {
         pi_cloud_instance_id    = local.cloud_instance_id
-        pi_vpn_connection_name  = "vpn-connection"
-        pi_ike_policy_id        = ibm_pi_ike_policy.rs-ike-policy.policy_id
-        pi_ipsec_policy_id      = ibm_pi_ipsec_policy.rs-ipsec-policy.policy_id
+        pi_vpn_connection_name  = "vpn_connection"
+        pi_ike_policy_id        = ibm_pi_ike_policy.rs_ike_policy.policy_id
+        pi_ipsec_policy_id      = ibm_pi_ipsec_policy.rs_ipsec_policy.policy_id
         pi_vpn_connection_mode  = "policy"
-        pi_networks             = [data.ibm_pi_network.ds-network.id]
+        pi_networks             = [data.ibm_pi_network.ds_network.id]
         pi_peer_gateway_address = "169.46.19.234"
         pi_peer_subnets         = ["10.177.131.192/26"]
     }
