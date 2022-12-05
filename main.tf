@@ -30,7 +30,7 @@ resource "ibm_pi_vpn_connection" "rs-vpn-connection" {
         pi_ike_policy_id        = ibm_pi_ike_policy.rs-ike-policy.policy_id
         pi_ipsec_policy_id      = ibm_pi_ipsec_policy.rs-ipsec-policy.policy_id
         pi_vpn_connection_mode  = "policy"
-        pi_networks             = data.ibm_pi_network.ds-network.id
+        pi_networks             = [data.ibm_pi_network.ds-network.id]
         pi_peer_gateway_address = "169.46.19.234"
         pi_peer_subnets         = ["10.177.131.192/26"]
     }
