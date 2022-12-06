@@ -1,6 +1,6 @@
 resource "ibm_pi_ike_policy" "rs_ike_policy" {
         pi_cloud_instance_id    = local.cloud_instance_id
-        pi_policy_name          = "ike_policy1"
+        pi_policy_name          = "ike_policy"
         pi_policy_dh_group = 20
         pi_policy_encryption = "aes-256-cbc"
         pi_policy_key_lifetime = 28800
@@ -11,7 +11,7 @@ resource "ibm_pi_ike_policy" "rs_ike_policy" {
 
 resource "ibm_pi_ipsec_policy" "rs_ipsec_policy" {
         pi_cloud_instance_id    = local.cloud_instance_id
-        pi_policy_name          = "ipsec_policy1"
+        pi_policy_name          = "ipsec_policy"
         pi_policy_dh_group = 20
         pi_policy_encryption = "aes-256-cbc"
         pi_policy_key_lifetime = 3600
